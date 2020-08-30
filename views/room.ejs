@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="room.css">
+    <script>console.log(" <%= roomId %> ")</script>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<style>
+    video {
+        height: 300px;
+        border-radius: 20px;
+        box-shadow: 2px 2px 20px black;
+    }
+
+    #video-grid {
+        display: flex;
+
+        justify-content: center;
+
+
+    }
+</style>
+
+<body>
+    <div id="video-grid">
+    </div>
+
+
+</body>
+
+<script src="script.js"></script>
+
+</html>

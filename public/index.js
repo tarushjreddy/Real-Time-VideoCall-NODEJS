@@ -1,4 +1,4 @@
-// const { text } = require("express");
+
 
 // console.log("omsairam");
 const socket = io('/');
@@ -32,10 +32,27 @@ navigator.mediaDevices.getUserMedia({
     })
 
 
-    socket.on('user-connected', (userId) => {
-        connecttouser(userId, stream);
+    let username = prompt("Please enter your name ")
+    console.log(username)
+
+    socket.emit('new- user-joined', username)
+
+    socket.on('user-joined', username => {
+        $('.message').append(`<li><br>${username}</li>` + "has joined the meeting")
+
+
     })
 
+
+
+    socket.on('user-connected', (userId) => {
+        connecttouser(userId, stream);
+
+
+    })
+    socket.on('createMessage', message => {
+        $('.message').append(`<li><br>${message} </li> `)
+    })
 })
 
 peer.on('open', id => {
@@ -75,6 +92,21 @@ $('html').keydown((e) => {
         msg.val('');
     }
 })
-socket.on('createMessage', message => {
-    console.log("this is coming from server", message)
-})
+const muteunmute = () => {
+    const enabled = myvideoStream.getAudioTracks()[0].enabled;
+    if (enabled) {
+        myvideoStream.getAudioTracks()[0].enabled = false;
+    }
+    else {
+        myvideoStream.getAudioTracks()[0].enabled = true;
+    }
+}
+const videojj = () => {
+    const enabled = myvideoStream.getVideoTracks()[0].enabled
+    if (enabled) {
+        myvideoStream.getVideoTracks()[0].enabled = false;
+    }
+    else {
+        myvideoStream.getVideoTracks()[0].enabled = true;
+    }
+}

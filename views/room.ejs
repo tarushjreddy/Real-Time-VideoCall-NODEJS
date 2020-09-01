@@ -19,13 +19,16 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
 </head>
 
 <style>
     video {
         height: 300px;
-        border-radius: 20px;
-        box-shadow: 2px 2px 20px black;
+        /* border-radius: 20px; */
+        /* box-shadow: 2px 2px 5px black; */
+        padding: 10px;
     }
 
     #video-grid {
@@ -36,6 +39,11 @@
 
     }
 
+    /* body {
+        background-color: black;
+        color: white;
+    } */
+
     li {
         display: inline;
         padding: 20px
@@ -43,6 +51,27 @@
 
     * {
         margin: 0px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .main_contrls_button {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        justify-content: center;
+        align-items: center;
+        /* height: 50px; */
+        cursor: pointer;
+        /* background-color: rgb(238, 36, 36); */
+    }
+
+    .main_contrls_button:hover {
+        background-color: rgb(56, 53, 53);
+        border-radius: 20px;
+
     }
 </style>
 
@@ -54,37 +83,107 @@
 
 
 
-    <div class="main" style="display: flex; height: 100vh; ">
-        <div class="main__left " style="flex: 0.8; flex-grow: 1;">
-            <div class="mainvideos" style="height: 90vh;">
-                <div id="video-grid">
+    <div class="main" style="display: flex;  ">
+        <div class="main__left " style="flex: .8; flex-grow: 1; background-color: rgb(44, 41, 41);">
+            <div class="mainvideos" style="height: 94vh; display: flex;  flex-direction: row;">
+                <div id="video-grid" style="padding: 10px;display: flex; overflow: hidden;;">
                 </div>
 
             </div>
             <div>
-                <ul style="list-style: none;">
-                    <li id="mute"> Mute</li>
-                    <li id="stopvideo"> Stop Video</li>
-                    <li id="messages">Messages</li>
-                    <li></li>
-                    <li></li>
-                </ul>
+
+            </div>
+            <div
+                style="display: flex; flex-direction: row; justify-content: space-around; background-color: black; color: white; flex-grow: 1;">
+                <div style="display: flex;">
+                    <div class="main_contrls_button" onclick="muteunmute()">
+                        <i class="fas fa-microphone-slash"></i>
+                        <span onclick="kik">Mute</span>
+
+                    </div>
+                    <div class="main_contrls_button" onclick="videojj()">
+                        <i class="fas fa-video-slash"></i>
+                        <span>Stop Video</span>
+
+                    </div>
+                    <div class="main_contrls_button">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Mute</span>
+
+                    </div>
+                </div>
+                <div style="display: flex;">
+                    <div class="main_contrls_button">
+
+                        <i class="far fa-comments"></i>
+                        <span>Messages</span>
+
+                    </div>
+                    <div class="main_contrls_button">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Security</span>
+
+                    </div>
+                    <div class="main_contrls_button">
+                        <a href="participants.ejs">
+                            <i class="fas fa-users"></i>
+                            <span>Participants</span></a>
+
+                    </div>
+                    <div class="main_contrls_button" style="display: flex; padding-left: 400px; color: red;">
+
+                        <span>Leave Meeting</span>
+
+                    </div>
+                </div>
+                <!-- <div style="width: 290px;"></div> -->
+
+                <!-- <div style="display: flex; flex-direction: row; flex: 0.2;"> -->
+                <!-- <div class="main_contrls_button">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Security</span>
+
+                </div>
+                <div class="main_contrls_button">
+                    <i class="far fa-comments"></i>
+                    <span>Chats</span>
+
+                </div>
+                <div class="main_contrls_button">
+                    <i class="fas fa-users"></i>
+                    <span>Participants</span>
+
+                </div>
+
+            </div> -->
             </div>
         </div>
 
         <div class="main__right"
-            style="display: flex; height: 97vh; flex: 0.2; justify-content: center; flex-direction: column; border: 2px solid black ; padding : 20px">
-            <div class="main_header" style="text-align: center;display: flex;  flex-direction: column; flex-grow: 2 ; ">
+            style="display: flex; height: 100vh; flex: 0.2; justify-content: center; flex-direction: column; border: 1px solid black ; background-color: rgb(44, 41, 41);">
+            <div class="main_header" style="text-align: center;display: flex;  flex-direction: column; color: white; ">
                 Chats
 
             </div>
-            <div class="inputmessage" style="  display: flex ; flex-direction: row;  justify-content: center;">
-                <input type="text" placeholder="Enter Message">
+            <div class="main__chatwindow"
+                style="display: flex;flex: 0.9; flex-grow: 1; flex-direction: column;   height: 500px; ">
+
+                <div class="message" style="color: white; overflow-y: scroll">
+                    <div class="messagee right"></div>
+                    <div class="messagee left"></div>
+                    <div class="messagee center"></div>
+
+                </div>
+
+
+            </div>
+            <div class=" inputmessage"
+                style="  display: flex ; flex-direction: column;  justify-content: center; height: 70px; border-radius: 20px; background-color: transparent; flex: 0; color: white;">
+                <input type="text" style="height: 56px; color: white; background-color: transparent; outline: none;"
+                    placeholder="Enter Message">
             </div>
         </div>
     </div>
-
-
 </body>
 
 

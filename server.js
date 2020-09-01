@@ -13,7 +13,9 @@ const peerServer = ExpressPeerServer(server, {
     debug: true,
 })
 
+const users = {
 
+}
 
 
 
@@ -31,9 +33,17 @@ app.use('/peerjs', peerServer);
 
 app.get('/', (req, res) => {
     // res.status(200).send("hello world");
-    res.redirect(`/${uuidv4()}`)
+    res.send(`http://localhost:8000/${uuidv4()}`)
     // console.log(roomId)
 })
+// app.get('/participants.ejs', (req, res) => {
+//     // res.status(200).send("hello world");
+//     // res.send(`http://localhost:8000/${uuidv4()}`)
+//     res.render('participants.ejs');
+//     // console.log(roomId)
+// })
+
+
 
 
 
@@ -51,7 +61,15 @@ io.on('connection', socket => {
         socket.on('message', message => {
             io.to(roomId).emit('createMessage', message)
         })
+    });
+    socket.on('new- user-joined', username => {
+        users[socket.id] = username;
+        console.log("new user", username)
+        socket.broadcast.emit('user-joined', username);
     })
+
+
+
 })
 
 
